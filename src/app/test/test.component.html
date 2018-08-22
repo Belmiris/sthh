@@ -1,0 +1,71 @@
+<div class="container">
+    <h1>Testing Component</h1>
+    <button class="btn btn-primary" (click)="getDatabases()">
+      <i class="fa fa-eye"></i>
+      Get Databases
+    </button>
+    <div>
+      {{ databasesObj | json }}
+    </div>
+    <button class="btn btn-primary" (click)="getSettings()">
+      <i class="fa fa-eye"></i>
+      Get Settings
+    </button>
+    <div>
+      {{ settingsObj | json }}
+    </div>
+    <button class="btn btn-primary" (click)="getSettingsService()">
+      <i class="fa fa-eye"></i>
+      Get Settings With Service
+    </button>
+    <div>
+      {{ settings | json }}
+    </div>
+    <!--
+    <button class="btn btn-primary" (click)="getDatabasesService()">
+      <i class="fa fa-eye"></i>
+      Get Databases With Service
+    </button>
+    <div>
+      {{ databases | json }}
+    </div>
+    -->
+    <div class="text-center">
+      <form #authDataForm="ngForm">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <div class="form-group">
+          <label for="UserName">User Name</label>
+          <input id="UserName" [(ngModel)]="authData.UserName" #UserName="ngModel" name="UserName" class="form-control" placeholder="User" required autofocus>
+          <div *ngIf="UserName.invalid && (UserName.dirty || UserName.touched)" class="alert alert-danger">
+            <div *ngIf="UserName.errors.required">Name is required.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Password">Password</label>
+          <input id="Password" [(ngModel)]="authData.Password" #Password="ngModel" name="Password" class="form-control" placeholder="Password" type="password" required>
+          <div *ngIf="Password.invalid && (Password.dirty || Password.touched)" class="alert alert-danger">
+            <div *ngIf="Password.errors.required">Password is required.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Database">Database</label>
+          <select id="Database" [(ngModel)]="authData.Database" #Database="ngModel" name="Database" class="custom-select" required>
+            <option disabled [ngValue]="null">Select Database</option>
+            <option *ngFor="let db of databases" [value]="db.Name">{{ db.Value }}</option>
+          </select>
+          <div *ngIf="Database.invalid && (Database.dirty || Database.touched)" class="alert alert-danger">
+            <div *ngIf="Database.errors.required">Database is required.</div>
+          </div>
+        </div>
+        <hr>
+        <button class="btn btn-lg btn-primary btn-block" [disabled]="!authDataForm.form.valid" (click)="postAuthData()">Sign in</button>
+      </form>
+    </div>
+    {{ authDataForm.value | json }}
+    <hr> 
+    {{ authData | json }}
+    <hr>
+    {{ authDataForm.form.valid }}
+    <hr>
+    {{ newPost | async | json }}
+  </div>

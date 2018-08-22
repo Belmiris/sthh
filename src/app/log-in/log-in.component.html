@@ -1,0 +1,60 @@
+<nav class="navbar navbar-dark bg-dark">
+  <span class="navbar-brand mb-0 h1">Welcome to StoreTrak!</span>
+</nav>
+<div class="container">
+  <form #authDataForm="ngForm">
+    <div class="text-center">
+      <!-- <h5>Welcome to StoreTrak!</h5> -->
+      <h6>Please sign in</h6>
+    </div>
+    <div class="form-group">
+      <label for="UserName">User Name</label>
+      <input id="UserName" [(ngModel)]="authData.UserName" #UserName="ngModel" name="UserName" class="form-control" placeholder="User" required autofocus>
+      <div *ngIf="UserName.invalid && (UserName.dirty || UserName.touched)" class="alert alert-danger">
+        <div *ngIf="UserName.errors.required">Name is required.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="Password">Password</label>
+      <input id="Password" [(ngModel)]="authData.Password" #Password="ngModel" name="Password" class="form-control" placeholder="Password" type="password" required>
+      <div *ngIf="Password.invalid && (Password.dirty || Password.touched)" class="alert alert-danger">
+        <div *ngIf="Password.errors.required">Password is required.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="Database">Database</label>
+      <select id="Database" [(ngModel)]="authData.Database" #Database="ngModel" name="Database" class="custom-select" required>
+        <option disabled [ngValue]="null">Select Database</option>
+        <option *ngFor="let db of databases" [value]="db.Name">{{ db.Value }}</option>
+      </select>
+      <div *ngIf="Database.invalid && (Database.dirty || Database.touched)" class="alert alert-danger">
+        <div *ngIf="Database.errors.required">Database is required.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ProfitCenter">Profit Center</label>
+      <input id="ProfitCenter" [(ngModel)]="authData.ProfitCenter" #ProfitCenter="ngModel" name="ProfitCenter" class="form-control" placeholder="Profit Center" type="number" required>
+      <div *ngIf="ProfitCenter.invalid && (ProfitCenter.dirty || ProfitCenter.touched)" class="alert alert-danger">
+        <div *ngIf="ProfitCenter.errors.required">Profit Center is required.</div>
+      </div>
+    </div>
+    <div *ngIf="!(result == null)">** {{ result }} **</div>
+    <!--
+    <hr>
+    <button class="btn btn-lg btn-primary btn-block" [disabled]="!authDataForm.form.valid" (click)="postAuthData()">
+      <i class="fa fa-sign-in"></i> Sign in
+    </button>
+    -->
+  </form>
+</div>
+<!-- Bottom Navbar-->
+<nav class="navbar fixed-bottom navbar-dark bg-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <button class="btn btn-primary" [disabled]="!authDataForm.form.valid" (click)="postAuthData()">
+          <i class="fa fa-sign-in"></i> Sign in
+        </button>
+      </li>
+    </ul>
+    <span class="navbar-text"><i>Version 1.0.0</i></span>
+  </nav>

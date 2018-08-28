@@ -5,6 +5,7 @@ import { SettingsService } from 'src/app/services/settings.service';
 import { AuthData } from 'src/app/models/auth-data.model';
 import { NameValue } from 'src/app/models/name-value.model';
 import { Settings } from 'src/app/models/settings.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -14,12 +15,15 @@ import { Settings } from 'src/app/models/settings.model';
 export class LogInComponent implements OnInit {
   authData = new AuthData(null, null, null, null, null, null);
   databases : NameValue[];
+  errors : NameValue[];
+  httpError : any;
   result : string;
 
   constructor(
     private settingsSvc : SettingsService, 
     private dbService : DatabasesService,
-    private authSvc : AuthService) { 
+    private authSvc : AuthService,
+    private router: Router) { 
   }
 
   ngOnInit() {
@@ -43,6 +47,22 @@ export class LogInComponent implements OnInit {
       (a: AuthData) => {
         console.log('received authorization');
         this.result = "Logged in successfully";
+        // We want to move (route) to the main screen here.
+        this.router.navigate(['/main']);
+      }
+    );
+
+    this.authSvc.error.subscribe(
+      (e: NameValue[]) => {
+        console.log('received authorization error');
+        this.errors = e;
+      }
+    );
+
+    this.authSvc.httpError.subscribe(
+      (h: any) => {
+        console.log('received http error');
+        this.httpError = h;
       }
     );
 

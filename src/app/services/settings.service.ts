@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthData } from 'src/app/models/auth-data.model';
 import { Settings } from 'src/app/models/settings.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class SettingsService {
   public auth: AuthData;
   public token: string;
 
-  constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   loadSettings() {
     if (this.settings == null) {
@@ -25,5 +26,14 @@ export class SettingsService {
     } else {
       this.settingsLoaded.emit(this.settings);
     }
+  }
+
+  public getAuth(): AuthData {
+    if (this.auth == undefined || this.auth == null) {
+      console.log('Empty authorization. Go to login.');
+      this.router.navigate(['/login']);
+    }
+
+    return this.auth;
   }
 }

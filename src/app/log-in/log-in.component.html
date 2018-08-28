@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark bg-dark">
   <span class="navbar-brand mb-0 h1">Welcome to StoreTrak!</span>
 </nav>
-<div class="container">
+<div class="container" style="margin-bottom: 60px; overflow-y: auto;">
   <form #authDataForm="ngForm">
     <div class="text-center">
       <!-- <h5>Welcome to StoreTrak!</h5> -->
@@ -39,22 +39,18 @@
       </div>
     </div>
     <div *ngIf="!(result == null)">** {{ result }} **</div>
-    <!--
-    <hr>
-    <button class="btn btn-lg btn-primary btn-block" [disabled]="!authDataForm.form.valid" (click)="postAuthData()">
-      <i class="fa fa-sign-in"></i> Sign in
-    </button>
-    -->
+    <div *ngIf="!(httpError == null)" class="alert alert-danger" role="alert">{{ httpError | json }}</div>
+    <div *ngFor="let err of errors" class="alert alert-danger" role="alert">{{ err.Name }} {{ err.Value }}</div>
   </form>
 </div>
 <!-- Bottom Navbar-->
 <nav class="navbar fixed-bottom navbar-dark bg-dark">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <button class="btn btn-primary" [disabled]="!authDataForm.form.valid" (click)="postAuthData()">
-          <i class="fa fa-sign-in"></i> Sign in
-        </button>
-      </li>
-    </ul>
-    <span class="navbar-text"><i>Version 1.0.0</i></span>
-  </nav>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <button class="btn btn-primary" [disabled]="!authDataForm.form.valid" (click)="postAuthData()">
+        <i class="fa fa-sign-in"></i> Sign in
+      </button>
+    </li>
+  </ul>
+  <span class="navbar-text"><i>Version 1.0.0</i></span>
+</nav>

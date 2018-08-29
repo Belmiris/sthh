@@ -39,8 +39,8 @@
       </div>
     </div>
     <div *ngIf="!(result == null)">** {{ result }} **</div>
-    <div *ngIf="!(httpError == null)" class="alert alert-danger" role="alert">{{ httpError | json }}</div>
     <div *ngFor="let err of errors" class="alert alert-danger" role="alert">{{ err.Name }} {{ err.Value }}</div>
+    <div *ngIf="!(httpError == null)" class="alert alert-danger" role="alert">{{ httpError | json }}</div>
   </form>
 </div>
 <!-- Bottom Navbar-->

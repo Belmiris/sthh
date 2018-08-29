@@ -16,10 +16,13 @@ import { LogInComponent } from './log-in/log-in.component';
 import { MainComponent } from './main/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { TestComponent } from './test/test.component';
+import { ItemLookupComponent } from './item-lookup/item-lookup.component';
+import { NavbarTopComponent } from './navbar-top/navbar-top.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LogInComponent },
   { path: 'main', component: MainComponent },
+  { path: 'itemlookup', component: ItemLookupComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -30,7 +33,9 @@ const appRoutes: Routes = [
     LogInComponent,
     MainComponent,
     TestComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ItemLookupComponent,
+    NavbarTopComponent
   ],
   imports: [
     Angular2FontawesomeModule,

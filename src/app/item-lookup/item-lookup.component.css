@@ -1,0 +1,10 @@
+/* .container-fluid {
+    background-color: lightgray;
+    padding-top: 5px;
+    padding-bottom: 5px;
+} */
+
+.tbl-head {
+    font-weight: bold;
+    white-space: nowrap;
+}
